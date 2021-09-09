@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private float moveH, moveV;
     [SerializeField] private float moveSpeed = 2.0f;
-    [SerializeField] private Joystick joystick;
+    [SerializeField] public Joystick joystick;
 
     private void Awake()
     {
