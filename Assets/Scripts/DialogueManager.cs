@@ -7,64 +7,47 @@ public class DialogueManager : MonoBehaviour
 {
     public Dialogue dialogue; 
 
-    Queue<string> sentences;
-
     public GameObject dialoguePanel;
     public TextMeshProUGUI displayText;
 
     string activeSentence;
 
     public float typingSpeed;
-    AudioSource Myaudio;
+    AudioSource myAudio;
     public AudioClip speakSound;
+
+    public int clicks; 
 
     void Start()
     {
-        sentences = new Queue<string>();
-        Myaudio = GetComponent<AudioSource>();
+        myAudio = GetComponent<AudioSource>();
     }
 
-    void StartDialogue()
+    IEnumerator StartDialogue()
     {
-        sentences.Clear();
+        GameManager.singleton.inDialogue = true;
 
-        foreach(string sentence in dialogue.sentenceList)
+        for (int i = 0; i < dialogue.sentenceList.Length; i++)
         {
-            sentences.Enqueue(sentence);
+            activeSentence = dialogue.sentenceList[i];
+            Debug.Log(activeSentence);
+
+            yield return new WaitForSeconds(1);
+
+            yield return new WaitUntil(()=>Input.GetMouseButtonUp(0));
+
+            clicks++;
         }
 
-        DisplayNextSentence();
-    }
-
-    void DisplayNextSentence()
-    {
-        if (sentences.Count <= 0)
-        {
-            displayText.text = activeSentence;
-            return; 
-        }
-
-        activeSentence = sentences.Dequeue();
-        Debug.Log(activeSentence);
+        GameManager.singleton.inDialogue = false;
     }
 
     private void OnTriggerEnter2D(Collider2D CircleColl)
     {
-        if (CircleColl.CompareTag("Player"))
+        if (GameManager.singleton.inDialogue == false && CircleColl.CompareTag("Player"))
         {
-            StartDialogue();
+            StartCoroutine(StartDialogue());
         }
 
-    }
-
-    void OnTriggerStay2D(Collider2D StayColl)
-    {
-        if (StayColl.CompareTag("Player"))
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                DisplayNextSentence();
-            }
-        }
     }
 }
