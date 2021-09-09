@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (canMove == true)
+        if (canMove == true && GameManager.singleton.inDialogue == false)
         {
             float moveH = joystick.Horizontal * moveSpeed;
             float moveV = joystick.Vertical * moveSpeed;
