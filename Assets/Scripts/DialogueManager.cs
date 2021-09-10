@@ -7,30 +7,18 @@ public class DialogueManager : MonoBehaviour
 {
     public Dialogue dialogue; 
 
-    public GameObject dialoguePanel;
-    public TextMeshProUGUI displayText;
-
     string activeSentence;
-
-    public float typingSpeed;
-    AudioSource myAudio;
-    public AudioClip speakSound;
-
     public int clicks; 
-
-    void Start()
-    {
-        myAudio = GetComponent<AudioSource>();
-    }
 
     IEnumerator StartDialogue()
     {
-        GameManager.singleton.inDialogue = true;
+
+        DialogueUI.singleton.Mostrar();
 
         for (int i = 0; i < dialogue.sentenceList.Length; i++)
         {
             activeSentence = dialogue.sentenceList[i];
-            Debug.Log(activeSentence);
+            DialogueUI.singleton.MostrarTexto(activeSentence);
 
             yield return new WaitForSeconds(1);
 
@@ -39,7 +27,7 @@ public class DialogueManager : MonoBehaviour
             clicks++;
         }
 
-        GameManager.singleton.inDialogue = false;
+        DialogueUI.singleton.Ocultar();
     }
 
     private void OnTriggerEnter2D(Collider2D CircleColl)
