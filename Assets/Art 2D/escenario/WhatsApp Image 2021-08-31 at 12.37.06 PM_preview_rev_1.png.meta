@@ -75,7 +75,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 30
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -311,10 +311,10 @@ TextureImporter:
       name: WhatsApp Image 2021-08-31 at 12.37.06 PM_preview_rev_1_8
       rect:
         serializedVersion: 2
-        x: 238
-        y: 44
-        width: 226
-        height: 99
+        x: 247
+        y: 45
+        width: 207
+        height: 97
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
